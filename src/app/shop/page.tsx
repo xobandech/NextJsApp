@@ -2,12 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { getProducts } from "./functions";
-
-type Product = {
-  id: string;
-  name: string;
-  price: number;
-};
+import { Product } from "@/types/Product";
 
 export default function ShopPage() {
   const [products, setProducts] = useState<Product[]>([]);
