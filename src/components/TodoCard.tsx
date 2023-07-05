@@ -1,11 +1,5 @@
 "use client"
-export type TodoCardProps = {
-  id: string;
-  title: string;
-  completed: false;
-  toggleTodo: () => void;
-};
-
+import { TodoCardProps } from "@/types/TodoCardProps";
 export function TodoCard({ id, title, completed, toggleTodo }: TodoCardProps) {
   return (
     <li className="flex gap-1 items-center">
