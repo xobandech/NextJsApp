@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { getProducts } from "./functions";
+
 type Product = {
   id: string;
   name: string;
