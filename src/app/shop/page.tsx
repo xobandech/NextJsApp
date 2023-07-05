@@ -1,13 +1,15 @@
 "use client";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 import Link from "next/link";
-import { CartItemsContext } from "@/contexts/CartItemsContext";
 import { getProducts } from "./functions";
 import { Product } from "@/types/Product";
+import { ProductsContext } from "@/contexts/ProductContext";
+import { CartItemsContext } from "@/contexts/CartItemsContext";
+import ProductCard from "@/components/ProductCard";
 
 export default function ShopPage() {
+  const { products, setProducts } = useContext(ProductsContext)
   const { cartItems, setCartItems } = useContext(CartItemsContext)
-
   useEffect(() => {
     const fetchProducts = async () => {
       const fetchedProducts: Product[] = await getProducts();
@@ -16,6 +18,10 @@ export default function ShopPage() {
 
     fetchProducts();
   }, []);
+
+  const handleAddToCart = (product: Product) => {
+    setCartItems([...cartItems, product]);
+  };
 
   return (
     <>
@@ -27,11 +33,13 @@ export default function ShopPage() {
         <div>
           {products.map((product) => {
             return (
-              <div className="w-[150px] outline outline-yellow-50 my-5 h-[200px]">
-                <h1 key={product.id}>
-                  {product.name} {product.price}
-                </h1>
-              </div>
+              <ProductCard   
+              key={product.id}
+              id={product.id}
+              name={product.name}
+              price={product.price}
+              handleAddToCart={() => handleAddToCart(product)}
+              />
             );
           })}
         </div>

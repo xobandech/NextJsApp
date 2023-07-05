@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import CartItemsProvider from "@/contexts/CartItemsContext";
+import ProductsContextProvider from "@/contexts/ProductContext";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -17,7 +18,9 @@ export default function RootLayout({
       <body
         className={`${inter.className} bg-[#333] text-white flex flex-col justify-center`}
       >
-        <CartItemsProvider>{children}</CartItemsProvider>
+        <CartItemsProvider>
+          <ProductsContextProvider>{children}</ProductsContextProvider>
+        </CartItemsProvider>
       </body>
     </html>
   );

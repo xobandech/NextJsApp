@@ -1,3 +1,4 @@
+"use client"
 import { createContext, useState } from "react";
 import { Product } from "@/types/Product";
 
