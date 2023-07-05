@@ -1,11 +1,12 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import Link from "next/link";
+import { CartItemsContext } from "@/contexts/CartItemsContext";
 import { getProducts } from "./functions";
 import { Product } from "@/types/Product";
 
 export default function ShopPage() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const { cartItems, setCartItems } = useContext(CartItemsContext)
 
   useEffect(() => {
     const fetchProducts = async () => {
