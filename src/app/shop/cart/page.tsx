@@ -22,6 +22,7 @@ export default function CartPage() {
               />
             );
           })}
+        <button onClick={() => console.log(cartItems)}>Show</button>
       </div>
     </>
   );
