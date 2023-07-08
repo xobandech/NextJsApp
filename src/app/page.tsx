@@ -1,13 +1,14 @@
 import { prisma } from "@/db"
 import Link from "next/link"
 import { TodoCard } from "@/components/TodoCard"
+
 function getTodos() {
   return prisma.todo.findMany()
 }
 
-async function toggleTodo (isChecked:boolean, id:string) {
+async function toggleTodo (completed:boolean, id:string) {
   "use server"
-  console.log(id, isChecked);
+  await prisma.todo.update({ where: { id }, data: { completed }})
 }
 
 export default async function Home() {
