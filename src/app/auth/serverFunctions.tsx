@@ -1,5 +1,6 @@
 "use server";
 import { prisma } from "@/db";
+import { redirect } from "next/navigation";
 export const handleRegistration = async (data: FormData) => {
   "use server";
   const password = data.get("password")?.valueOf() as string;
@@ -7,7 +8,8 @@ export const handleRegistration = async (data: FormData) => {
   const username = data.get("username")?.valueOf() as string;
   if (password === confirmPassword) {
     await prisma.user.create({ data: { password, username } });
-    console.log("success");
+    console.log("Successfull registration");
+    redirect("/suc");
   }
 };
 
@@ -16,11 +18,16 @@ export const handleLogin = async (data: FormData) => {
   const password = data.get("password")?.valueOf() as string;
   const username = data.get("username")?.valueOf() as string;
   try {
-    prisma.user.findUnique({ where: { username: username } }).then((user) => {
-      if (password === user?.password) {
-        console.log("Succesfull login");
-      }
-    });
+    await prisma.user
+      .findUnique({ where: { username: username } })
+      .then((user) => {
+        console.log(password === user?.password);
+        console.log(password, user?.password);
+        if (password === user?.password) {
+          console.log("Succesfull login");
+          redirect("/suc");
+        }
+      });
   } catch (e) {
     console.log(e);
   }
