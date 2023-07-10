@@ -1,7 +1,7 @@
 "use client";
-import { User } from "@/types/User";
 import { useEffect, useState } from "react";
 import { handleLogin, handleRegistration, getUsers } from "./serverFunctions";
+import { User } from "@/types/User";
 
 const AuthPage = () => {
   const [users, setUsers] = useState<User[]>([]);
