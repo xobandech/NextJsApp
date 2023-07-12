@@ -2,6 +2,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import CartItemsProvider from "@/contexts/CartItemsContext";
 import ProductsContextProvider from "@/contexts/ProductContext";
+import NavigationBar from "@/components/NavigationBar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -19,7 +20,10 @@ export default function RootLayout({
         className={`${inter.className} bg-[#333] text-white flex flex-col justify-center`}
       >
         <CartItemsProvider>
-          <ProductsContextProvider>{children}</ProductsContextProvider>
+          <ProductsContextProvider>
+            <NavigationBar />
+            {children}
+            </ProductsContextProvider>
         </CartItemsProvider>
       </body>
     </html>
